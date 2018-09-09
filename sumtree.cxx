@@ -7,13 +7,17 @@ SumTree::SumTree() {
     _tree.resize((std::size_t) _max_elem(_depth));
 }
 
+long SumTree::__len__() {
+    return _tree[0];
+}
+
 void SumTree::append(long item, long size) {
     if (_data.size() + 1 > _max_elem(_depth)) { _rebuild(); }
 
     _append(item, size);
 }
 
-std::pair<long,long> SumTree::find(long value) {
+std::pair<long,long> SumTree::__getitem__(long value) {
     std::size_t search_idx = 0; long search_depth = 1;
 
     while (search_depth++ <= _depth) {
@@ -57,29 +61,13 @@ void SumTree::_rebuild() {
     std::vector<int> sizes(_tree.begin() + _data_offset, _tree.end());
     _tree.clear(); _data_offset = 0; _depth = 0;
 
-    while (_max_elem(_depth) < _data.size() + 1)
-        _data_offset += _max_elem(_depth++);
+    while (_max_elem(_depth) < _data.size() + 1) { _data_offset += _max_elem(_depth++); }
 
     _tree.resize(_data_offset + _max_elem(_depth));
-    for (std::size_t i = 0; i < _data.size(); ++i)
-        _update_size(i, sizes[i]);
+    for (std::size_t i = 0; i < _data.size(); ++i) { _update_size(i, sizes[i]); }
 }
 
 std::size_t SumTree::_max_elem(long depth) { return (std::size_t) pow(2, depth); }
 std::size_t SumTree::_parent_of(std::size_t idx) { return (std::size_t) floor((idx - 1) / 2); }
 std::size_t SumTree::_left_child_of(std::size_t idx) { return 2 * idx + 1; }
 std::size_t SumTree::_right_child_of(std::size_t idx) { return 2 * idx + 2; }
-
-
-int main() {
-    SumTree st{};
-    st.append(7, 7);
-    st.append(2, 2);
-    st.append(2, 2);
-    auto r1 = st.find(2);
-    std::cout << r1.first << " " << r1.second << std::endl;
-    auto r2 = st.pop_front();
-    std::cout << r2.first << " " << r2.second << std::endl;
-
-    return 0;
-}

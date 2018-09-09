@@ -25,9 +25,10 @@ private:
 
 public:
     SumTree();
+    long __len__();
     void append(long item, long size);
     std::pair<long,long> pop_front();
-    std::pair<long,long> find(long value);
+    std::pair<long,long> __getitem__(long value);
 };
 
 

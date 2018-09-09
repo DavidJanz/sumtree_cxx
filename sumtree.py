@@ -109,14 +109,17 @@ class SumTree(_object):
         except __builtin__.Exception:
             self.this = this
 
+    def __len__(self):
+        return _sumtree.SumTree___len__(self)
+
     def append(self, item, size):
         return _sumtree.SumTree_append(self, item, size)
 
     def pop_front(self):
         return _sumtree.SumTree_pop_front(self)
 
-    def find(self, value):
-        return _sumtree.SumTree_find(self, value)
+    def __getitem__(self, value):
+        return _sumtree.SumTree___getitem__(self, value)
     __swig_destroy__ = _sumtree.delete_SumTree
     __del__ = lambda self: None
 SumTree_swigregister = _sumtree.SumTree_swigregister
