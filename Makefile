@@ -1,9 +1,4 @@
 all:
-	swig -python -c++ -o sumtree_wrap.cxx sumtree.i
-#	python3 setup.py build_ext
-	python3 setup.py install --user
+	swig -python -c++ -o 'src/sumtree_wrap.cxx' 'src/sumtree.i'
 
 clean:
-	rm _sumtree*
-	rm *_wrap*
-	rm sumtree.py

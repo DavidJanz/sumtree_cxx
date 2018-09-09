@@ -1,5 +1,7 @@
-from setuptools import setup, Extension, find_packages
+from setuptools import setup, Extension
 
-sumtree = Extension('_sumtree', sources=['sumtree.cxx', 'sumtree_wrap.cxx'])
+sumtree = Extension('_sumtree', sources=['src/sumtree.cxx',
+                                         'src/sumtree_wrap.cxx'])
 
-setup(name='sumtree', version='1.0', packages=find_packages(), ext_modules=[sumtree])
+setup(name='sumtree', version='0.2',
+     packages=['.'], ext_modules=[sumtree])
