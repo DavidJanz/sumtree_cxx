@@ -112,6 +112,9 @@ class SumTree(_object):
     def append(self, item, size):
         return _sumtree.SumTree_append(self, item, size)
 
+    def pop_front(self):
+        return _sumtree.SumTree_pop_front(self)
+
     def find(self, value):
         return _sumtree.SumTree_find(self, value)
     __swig_destroy__ = _sumtree.delete_SumTree

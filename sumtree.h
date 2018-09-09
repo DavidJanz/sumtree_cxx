@@ -26,6 +26,7 @@ private:
 public:
     SumTree();
     void append(long item, long size);
+    std::pair<long,long> pop_front();
     std::pair<long,long> find(long value);
 };
 

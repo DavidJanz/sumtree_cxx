@@ -43,6 +43,16 @@ void SumTree::_append(long item, long size) {
     _update_size(_data.size() - 1, size);
 }
 
+std::pair<long,long> SumTree::pop_front() {
+    auto front_size = _tree[_data_offset];
+    auto front_item = _data[0];
+    _data.erase(_data.begin());
+    _tree.erase(_tree.begin());
+    _rebuild();
+
+    return {front_item, front_size};
+}
+
 void SumTree::_rebuild() {
     std::vector<int> sizes(_tree.begin() + _data_offset, _tree.end());
     _tree.clear(); _data_offset = 0; _depth = 0;
@@ -66,8 +76,10 @@ int main() {
     st.append(7, 7);
     st.append(2, 2);
     st.append(2, 2);
-    auto r = st.find(2);
-    std::cout << r.first << " " << r.second << std::endl;
+    auto r1 = st.find(2);
+    std::cout << r1.first << " " << r1.second << std::endl;
+    auto r2 = st.pop_front();
+    std::cout << r2.first << " " << r2.second << std::endl;
 
     return 0;
 }

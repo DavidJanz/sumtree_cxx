@@ -3294,6 +3294,33 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SumTree_pop_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  SumTree *arg1 = (SumTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::pair< long,long > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:SumTree_pop_front",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_SumTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SumTree_pop_front" "', argument " "1"" of type '" "SumTree *""'"); 
+  }
+  arg1 = reinterpret_cast< SumTree * >(argp1);
+  result = (arg1)->pop_front();
+  {
+    PyObject *list = PyTuple_New(2);
+    PyTuple_SetItem(list, 0, PyInt_FromLong((&result)->first));
+    PyTuple_SetItem(list, 1, PyInt_FromLong((&result)->second));
+    resultobj = list;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_SumTree_find(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   SumTree *arg1 = (SumTree *) 0 ;
@@ -3362,6 +3389,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_SumTree", _wrap_new_SumTree, METH_VARARGS, NULL},
 	 { (char *)"SumTree_append", _wrap_SumTree_append, METH_VARARGS, NULL},
+	 { (char *)"SumTree_pop_front", _wrap_SumTree_pop_front, METH_VARARGS, NULL},
 	 { (char *)"SumTree_find", _wrap_SumTree_find, METH_VARARGS, NULL},
 	 { (char *)"delete_SumTree", _wrap_delete_SumTree, METH_VARARGS, NULL},
 	 { (char *)"SumTree_swigregister", SumTree_swigregister, METH_VARARGS, NULL},
