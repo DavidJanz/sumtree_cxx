@@ -1,6 +1,6 @@
-import sumtree
+from sumtree import SumTree
 
-st = sumtree.SumTree()
+st = SumTree()
 
 st.append(1, 2)
 st.append(2, 2)
