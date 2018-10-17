@@ -1,20 +1,26 @@
 #include "sumtree.h"
 
 
-SumTree::SumTree() {
+SumTree::SumTree(long maxsize) {
+    _maxsize = maxsize;
+    _write_pointer = 0;
     _depth = 0;
     _data_offset = 0;
-    _tree.resize((std::size_t) _max_elem(_depth));
+
+    _rebuild(_maxsize);
+}
+
+void SumTree::append(long item, long size) {
+    long prev_size = _tree[_data_offset + _write_pointer];
+
+    _data[_write_pointer] = item;
+    _update_size(_write_pointer, size - prev_size);
+
+    _write_pointer = (_write_pointer + 1)% _maxsize;
 }
 
 long SumTree::__len__() {
     return _tree[0];
-}
-
-void SumTree::append(long item, long size) {
-    if (_data.size() + 1 > _max_elem(_depth)) { _rebuild(); }
-
-    _append(item, size);
 }
 
 std::pair<long,long> SumTree::__getitem__(long value) {
@@ -42,29 +48,21 @@ void SumTree::_update_size(std::size_t data_idx, long size) {
     }
 }
 
-void SumTree::_append(long item, long size) {
-    _data.push_back(item);
-    _update_size(_data.size() - 1, size);
-}
-
-std::pair<long,long> SumTree::pop_front() {
-    auto front_size = _tree[_data_offset];
-    auto front_item = _data[0];
-    _data.erase(_data.begin());
-    _tree.erase(_tree.begin());
-    _rebuild();
-
-    return {front_item, front_size};
-}
-
-void SumTree::_rebuild() {
+void SumTree::_rebuild(long new_size) {
     std::vector<int> sizes(_tree.begin() + _data_offset, _tree.end());
     _tree.clear(); _data_offset = 0; _depth = 0;
 
-    while (_max_elem(_depth) < _data.size() + 1) { _data_offset += _max_elem(_depth++); }
+    while (_max_elem(_depth) < new_size) {
+        _data_offset += _max_elem(_depth++);
+    }
 
     _tree.resize(_data_offset + _max_elem(_depth));
-    for (std::size_t i = 0; i < _data.size(); ++i) { _update_size(i, sizes[i]); }
+    _tree.clear();
+    for (std::size_t i = 0; i < sizes.size(); ++i) {
+        _update_size(i, sizes[i]);
+    }
+
+    _data.resize(new_size);
 }
 
 std::size_t SumTree::_max_elem(long depth) { return (std::size_t) pow(2, depth); }
