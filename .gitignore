@@ -4,3 +4,5 @@ cmake-build-debug
 build
 CMakeLists.txt
 __pycache__
+sumtree/sumtree.py
+sumtree/sumtree_wrap.cxx
