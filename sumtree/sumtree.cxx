@@ -16,7 +16,7 @@ void SumTree::append(long item, long size) {
     _data[_write_pointer] = item;
     _update_size(_write_pointer, size - prev_size);
 
-    _write_pointer = (_write_pointer + 1)% _maxsize;
+    _write_pointer = (_write_pointer + 1) % _maxsize;
 }
 
 long SumTree::__len__() {
