@@ -1,4 +1,4 @@
-all:
+swig:
 	swig -python -c++ -o 'sumtree/sumtree_wrap.cxx' 'sumtree/sumtree.i'
 
 test:
